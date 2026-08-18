@@ -1,0 +1,12 @@
+{
+  "generation": {"count": 1000, "seed": null, "unique_records": true},
+  "fields": {"surname": true, "name": true, "patronymic": true, "gender": true, "birth_date": true, "phone": true, "birth_city": true, "origin": true},
+  "gender": {"male_percent": 50, "female_percent": 50},
+  "origin": {"russia_percent": 80, "cis_percent": 20},
+  "birth_date": {"min_date": "1950-01-01", "max_date": "2005-12-31", "format": "%d.%m.%Y"},
+  "phone": {"prefix": "+7", "digits_after_prefix": 10, "format": "+7##########"},
+  "declension": {"enabled": false, "case": "genitive"},
+  "exclusions": {"enabled": true, "directory": "exclusions"},
+  "data_directory": "data",
+  "output": {"path": "output/generated_people.csv", "delimiter": ";", "encoding": "utf-8-sig"}
+}
