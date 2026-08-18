@@ -62,3 +62,15 @@ python -m fio_generator --config config.example.json --count 10000 --output outp
 ```bash
 pytest
 ```
+
+## Очистка и сортировка справочника
+
+Утилита `scripts/sort_dictionary.py` сортирует файл по алфавиту, удаляет
+пустые строки и дубли (без учёта регистра), затем заменяет исходный файл.
+
+```bash
+python scripts/sort_dictionary.py data/russia/cities.txt
+```
+
+В `fish`, если виртуальное окружение активно, можно использовать ту же команду
+`python`; либо запустить напрямую `.venv/bin/python scripts/sort_dictionary.py data/russia/cities.txt`.

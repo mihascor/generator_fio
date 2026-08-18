@@ -14,6 +14,7 @@ from fio_generator.exporters import export_csv
 from fio_generator.generator import PersonGenerator
 from fio_generator.models import Gender, Person
 from fio_generator.phone import generate_phone
+from scripts.sort_dictionary import normalize_dictionary
 
 
 ROOT = Path(__file__).parents[1]
@@ -63,6 +64,13 @@ def test_exclusions_case_insensitive(tmp_path):
     (tmp_path / "names.txt").write_text(" иВАН \n", encoding="utf-8")
     result = load_exclusions(tmp_path, True)
     assert "иван" in result["names"]
+
+
+def test_sort_dictionary_removes_case_insensitive_duplicates(tmp_path):
+    path = tmp_path / "cities.txt"
+    path.write_text("Москва\n алма-Ата \nМОСКВА\n\nАстана\n", encoding="utf-8")
+    assert normalize_dictionary(path) == (4, 3)
+    assert path.read_text(encoding="utf-8") == "алма-Ата\nАстана\nМосква\n"
 
 
 def test_declension_male_and_female():
