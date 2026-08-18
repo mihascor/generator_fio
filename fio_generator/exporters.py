@@ -16,13 +16,15 @@ def person_row(person: Person, config: AppConfig, declensor: NameDeclensor | Non
         if enabled:
             values[field] = raw[field]
     names = [raw[field] for field in ("surname", "name", "patronymic") if config.fields[field]]
-    values["full_name"] = " ".join(names)
+    if config.fields["full_name"]:
+        values["full_name"] = " ".join(names)
     if config.declension_enabled and declensor:
         declined = {"surname": declensor.decline_surname(person.surname, person.gender, config.declension_case), "name": person.name, "patronymic": declensor.decline_patronymic(person.patronymic, person.gender, config.declension_case)}
         for field in ("surname", "name", "patronymic"):
             if config.fields[field]:
                 values[f"{field}_declined"] = declined[field]
-        values["full_name_declined"] = " ".join(declined[field] for field in ("surname", "name", "patronymic") if config.fields[field])
+        if config.fields["full_name"]:
+            values["full_name_declined"] = " ".join(declined[field] for field in ("surname", "name", "patronymic") if config.fields[field])
     return values
 
 

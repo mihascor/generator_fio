@@ -75,7 +75,7 @@ def test_declension_male_and_female():
 
 
 def test_generation_distribution_origin_gender_seed_and_disabled_fields(tmp_path):
-    data = config_data(generation={"count": 500, "seed": 42, "unique_records": False}, fields={"surname": True, "name": True, "patronymic": False, "gender": False, "birth_date": False, "phone": False, "birth_city": False, "origin": False})
+    data = config_data(generation={"count": 500, "seed": 42, "unique_records": False}, fields={"surname": True, "name": True, "patronymic": False, "full_name": False, "gender": False, "birth_date": False, "phone": False, "birth_city": False, "origin": False})
     path = write_config(tmp_path, data)
     config = load_config(path)
     from fio_generator.names import load_dictionaries
@@ -88,7 +88,7 @@ def test_generation_distribution_origin_gender_seed_and_disabled_fields(tmp_path
     assert 190 < males < 310 and 350 < russia < 450
     export_csv(first[:1], config)
     header = next(csv.reader(config.output_path.open(encoding="utf-8-sig"), delimiter=";"))
-    assert header == ["id", "surname", "name", "full_name"]
+    assert header == ["id", "surname", "name"]
 
 
 def test_csv_declension(tmp_path):

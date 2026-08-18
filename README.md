@@ -22,6 +22,12 @@ Linux/macOS:
 source .venv/bin/activate
 ```
 
+Для shell `fish` (часто выбран в терминале VS Code на Linux):
+
+```fish
+source .venv/bin/activate.fish
+```
+
 ```bash
 pip install -r requirements.txt
 ```
@@ -37,7 +43,7 @@ python -m fio_generator --config config.example.json --count 10000 --output outp
 
 ## Конфигурация
 
-`generation` задаёт число строк, seed (или `null`) и требование полной уникальности записи. `fields` включает колонки; `full_name` создаётся автоматически из включённых частей ФИО. `gender` и `origin` содержат проценты, каждая сумма обязана быть 100.
+`generation` задаёт число строк, seed (или `null`) и требование полной уникальности записи. `fields` включает колонки; `full_name` собирается из включённых частей ФИО и может быть отключён. `gender` и `origin` содержат проценты, каждая сумма обязана быть 100.
 
 `birth_date` содержит включительный диапазон ISO-дат и формат вывода. `phone` использует шаблон: каждый `#` заменяется цифрой, а число `#` должно совпадать с `digits_after_prefix`. Например, `+7 (###) ###-##-##`.
 

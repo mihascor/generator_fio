@@ -1,6 +1,6 @@
 {
   "generation": {"count": 1000, "seed": null, "unique_records": true},
-  "fields": {"surname": true, "name": true, "patronymic": true, "gender": true, "birth_date": true, "phone": true, "birth_city": true, "origin": true},
+  "fields": {"surname": true, "name": true, "patronymic": true, "full_name": true, "gender": true, "birth_date": true, "phone": true, "birth_city": true, "origin": true},
   "gender": {"male_percent": 50, "female_percent": 50},
   "origin": {"russia_percent": 80, "cis_percent": 20},
   "birth_date": {"min_date": "1950-01-01", "max_date": "2005-12-31", "format": "%d.%m.%Y"},

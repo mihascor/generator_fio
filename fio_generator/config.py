@@ -99,13 +99,13 @@ def load_config(path: str | Path, overrides: dict[str, Any] | None = None) -> Ap
     if not isinstance(unique, bool):
         raise ConfigError("'generation.unique_records' должен быть true или false.")
     fields = _require_dict(root.get("fields"), "fields")
-    allowed_fields = ("surname", "name", "patronymic", "gender", "birth_date", "phone", "birth_city", "origin")
+    allowed_fields = ("surname", "name", "patronymic", "full_name", "gender", "birth_date", "phone", "birth_city", "origin")
     unknown = set(fields) - set(allowed_fields)
     if unknown:
         raise ConfigError(f"Неизвестные поля в 'fields': {', '.join(sorted(unknown))}.")
     normalized_fields: dict[str, bool] = {}
     for field in allowed_fields:
-        value = fields.get(field, False)
+        value = fields.get(field, True if field == "full_name" else False)
         if not isinstance(value, bool):
             raise ConfigError(f"'fields.{field}' должен быть true или false.")
         normalized_fields[field] = value

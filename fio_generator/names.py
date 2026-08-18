@@ -23,7 +23,8 @@ class OriginDictionary:
     cities: tuple[str, ...]
 
     def values(self, kind: str, gender: Gender) -> tuple[str, ...]:
-        return getattr(self, f"{gender.value.lower()}_{kind}s")
+        prefix = "male" if gender == Gender.MALE else "female"
+        return getattr(self, f"{prefix}_{kind}s")
 
 
 _FILES = ("male_names", "female_names", "male_surnames", "female_surnames", "male_patronymics", "female_patronymics", "cities")

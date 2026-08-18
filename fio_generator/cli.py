@@ -31,5 +31,5 @@ def main(argv: list[str] | None = None) -> int:
         logging.error("%s", error)
         return 2
     result = statistics(people)
-    print(f"Generated: {len(people)}\nMale: {result['Male']}\nFemale: {result['Female']}\nRussia: {result['Russia']}\nCIS: {result['CIS']}\nOutput: {path}")
+    print(f"Generated: {len(people)}\nМуж: {result['Муж']}\nЖен: {result['Жен']}\nRussia: {result['Russia']}\nCIS: {result['CIS']}\nOutput: {path}")
     return 0

@@ -6,8 +6,8 @@ from enum import Enum
 
 
 class Gender(str, Enum):
-    MALE = "Male"
-    FEMALE = "Female"
+    MALE = "Муж"
+    FEMALE = "Жен"
 
 
 @dataclass(frozen=True)
