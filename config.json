@@ -7,15 +7,15 @@
     "gender": true,
     "birth_date": true,
     "phone": true,
-    "birth_city": true,
+    "birth_city": false,
     "full_name": false,
     "origin": false
   },
   "gender": { "male_percent": 50, "female_percent": 50 },
-  "origin": { "russia_percent": 80, "cis_percent": 20 },
+  "origin": { "russia_percent": 50, "cis_percent": 50 },
   "birth_date": {
-    "min_date": "1950-01-01",
-    "max_date": "2005-12-31",
+    "min_date": "2000-01-01",
+    "max_date": "2009-12-31",
     "format": "%d.%m.%Y"
   },
   "phone": {
