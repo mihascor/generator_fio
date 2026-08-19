@@ -27,7 +27,7 @@ class OriginDictionary:
         return getattr(self, f"{prefix}_{kind}s")
 
 
-_FILES = ("male_names", "female_names", "male_surnames", "female_surnames", "male_patronymics", "female_patronymics", "cities")
+_FILES = ("male_names", "female_names", "male_surnames", "female_surnames", "male_patronymics", "female_patronymics")
 
 
 def read_values(path: Path) -> tuple[str, ...]:
@@ -42,20 +42,28 @@ def read_values(path: Path) -> tuple[str, ...]:
 
 
 def load_dictionaries(data_directory: Path, exclusions: dict[str, set[str]]) -> dict[str, OriginDictionary]:
-    """Загрузить группы из data/russia и data/cis; легко расширяется новыми папками."""
+    """Загрузить группы из data/* и общий список городов из data/cities.txt."""
     if not data_directory.is_dir():
         raise DictionaryError(f"Каталог справочников не найден: {data_directory}")
+    cities = tuple(
+        item
+        for item in read_values(data_directory / "cities.txt")
+        if item.casefold().strip() not in exclusions.get("cities", set())
+    )
+    if not cities:
+        raise DictionaryError(f"После исключений справочник пуст: {data_directory / 'cities.txt'}")
     dictionaries: dict[str, OriginDictionary] = {}
     for directory in data_directory.iterdir():
         if not directory.is_dir():
             continue
         values: dict[str, tuple[str, ...]] = {}
         for filename in _FILES:
-            category = "cities" if filename == "cities" else filename.split("_", 1)[1]
+            category = filename.split("_", 1)[1]
             filtered = tuple(item for item in read_values(directory / f"{filename}.txt") if item.casefold().strip() not in exclusions.get(category, set()))
             if not filtered:
                 raise DictionaryError(f"После исключений справочник пуст: {directory / (filename + '.txt')}")
             values[filename] = filtered
+        values["cities"] = cities
         label = "Russia" if directory.name.casefold() == "russia" else "CIS" if directory.name.casefold() == "cis" else directory.name
         dictionaries[label] = OriginDictionary(**values)
     for required in ("Russia", "CIS"):

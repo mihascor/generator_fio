@@ -99,6 +99,15 @@ def test_generation_distribution_origin_gender_seed_and_disabled_fields(tmp_path
     assert header == ["id", "surname", "name"]
 
 
+def test_cities_are_loaded_from_the_shared_data_file(tmp_path):
+    data = config_data(generation={"count": 30, "seed": 7, "unique_records": False})
+    config = load_config(write_config(tmp_path, data))
+    shared_cities = {line.strip() for line in (config.data_directory / "cities.txt").read_text(encoding="utf-8").splitlines() if line.strip()}
+    from fio_generator.names import load_dictionaries
+    people = PersonGenerator(config, load_dictionaries(config.data_directory, {})).generate()
+    assert all(person.birth_city in shared_cities for person in people)
+
+
 def test_csv_declension(tmp_path):
     data = config_data(generation={"count": 1, "seed": 1, "unique_records": False}, declension={"enabled": True, "case": "genitive"})
     config = load_config(write_config(tmp_path, data))

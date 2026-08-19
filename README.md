@@ -53,7 +53,7 @@ python -m fio_generator --config config.example.json --count 10000 --output outp
 
 ## Справочники и исключения
 
-Справочники лежат в `data/russia` и `data/cis`; в каждом каталоге требуются файлы `male_names.txt`, `female_names.txt`, `male_surnames.txt`, `female_surnames.txt`, `male_patronymics.txt`, `female_patronymics.txt`, `cities.txt`. По одному значению в строке. Пустые строки и дубли игнорируются. Новые каталоги можно добавлять в загрузчик без изменения генератора; для выбора новой группы нужно добавить её процент в конфигурацию.
+Справочники имён лежат в `data/russia` и `data/cis`; в каждом каталоге требуются файлы `male_names.txt`, `female_names.txt`, `male_surnames.txt`, `female_surnames.txt`, `male_patronymics.txt`, `female_patronymics.txt`. Города рождения для всех категорий всегда берутся только из общего файла `data/cities.txt`. По одному значению в строке. Пустые строки и дубли игнорируются. Новые каталоги можно добавлять в загрузчик без изменения генератора; для выбора новой группы нужно добавить её процент в конфигурацию.
 
 В `exclusions/names.txt`, `surnames.txt`, `patronymics.txt`, `cities.txt` укажите исключаемые значения построчно. Регистр и пробелы по краям не учитываются. Фильтрация происходит один раз при загрузке справочников.
 
@@ -69,7 +69,7 @@ pytest
 пустые строки и дубли (без учёта регистра), затем заменяет исходный файл.
 
 ```bash
-python scripts/sort_dictionary.py data/russia/cities.txt
+python scripts/sort_dictionary.py data/cities.txt
 ```
 
 В `fish`, если виртуальное окружение активно, можно использовать ту же команду
