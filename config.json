@@ -8,11 +8,11 @@
     "birth_date": true,
     "phone": true,
     "birth_city": true,
-    "full_name": false,
-    "origin": false
+    "full_name": true,
+    "origin": true
   },
   "gender": { "male_percent": 50, "female_percent": 50 },
-  "origin": { "russia_percent": 50, "cis_percent": 50 },
+  "origin": { "russia_percent": 80, "cis_percent": 20 },
   "birth_date": {
     "min_date": "2000-01-01",
     "max_date": "2009-12-31",
